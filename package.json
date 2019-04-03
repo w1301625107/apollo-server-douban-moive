@@ -1,0 +1,24 @@
+{
+  "name": "appllo-serve-on-douban",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "babel-watch  index.js --inspect"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^2.4.8",
+    "axios": "^0.18.0",
+    "graphql": "^14.2.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.0",
+    "@babel/plugin-transform-runtime": "^7.4.3",
+    "@babel/preset-env": "^7.4.2",
+    "@babel/runtime": "^7.4.3",
+    "babel-cli": "^6.26.0",
+    "babel-watch": "^7.0.0"
+  }
+}

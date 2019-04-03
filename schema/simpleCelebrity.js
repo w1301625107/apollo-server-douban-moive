@@ -1,0 +1,20 @@
+const { gql } = require('apollo-server');
+
+const typeDefs = gql `
+  type SimpleCelebrity {
+
+    "影人条目 id"
+    id:String
+
+    "中文名"
+    name:String
+
+    "影人条目 URL"
+    alt:String
+
+    "影人头像，分别提供 420px x 600px(大)，140px x 200px(中) 70px x 100px(小)尺寸"
+    avatars:Images
+
+}
+`
+export default typeDefs
