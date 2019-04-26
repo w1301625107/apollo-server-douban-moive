@@ -1,46 +1,31 @@
-import typeDefs from './allSchemas'
+import {
+  makeExecutableSchema
+} from 'graphql-tools';
 const {
   ApolloServer,
   gql
 } = require('apollo-server');
-const axios = require('axios')
+import {getMovie} from './api/index'
 
-const me = 'https://api.douban.com'
-const other = 'https://douban.uieee.com'
-
-const proxy = false;
-
-const baseUrl = proxy ? other : me
-
-async function getMovie(id) {
-  let data = await axios.get(`${baseUrl}/v2/movie/subject/${id}`)
-  // console.log("TCL: getMovie -> data", data)
-  console.log('fetched')
-  return data.data
-}
-
-
-// The GraphQL schema
-// const typeDefs = gql`
-//   # type Movie {
-
-//   # }
-//   type Query {
-//     "A simple type for getting started!"
-//     hello: String
-//   }
-// `;
+import typeDefs from './schema/index'
 
 //A map of functions which return data for the schema.
 const resolvers = {
   Query: {
-    movie: (root, { id }) => getMovie(id),
+    movie: (root, {
+      id
+    }) => getMovie(id),
   },
 };
 
+
+const schema = makeExecutableSchema({
+  typeDefs: [...typeDefs],
+  resolvers: resolvers
+});
+
 const server = new ApolloServer({
-  typeDefs,
-  resolvers,
+  schema
 });
 
 server.listen().then(({

@@ -273,7 +273,7 @@ popular_comments:[Comment!]
 popular_reviews:[SimpleReview!]
 
 }
-type Query {
+extend type Query {
     "A simple type for getting started!"
     movie(id:String!): Movie
   }
