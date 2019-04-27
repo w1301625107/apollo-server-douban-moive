@@ -6,12 +6,12 @@
   "scripts": {
     "dev": "babel-watch  index.js --inspect",
     "start": "nodemon --exec ./node_modules/.bin/ts-node -- ./src/index.ts ",
-    "precommit": "lint-staged",
     "format": "prettier --write \"src/**/*.{ts,js}\" \"api/**/*.{ts,js}\""
   },
   "lint-staged": {
     "src/**/*.{ts,js,json,css,}": [
-      "prettier --write"
+      "prettier --write",
+      "git add"
     ],
     "api/**/*.{ts,js}": [
       "prettier --write",
@@ -43,5 +43,10 @@
     "husky": "^2.1.0",
     "lint-staged": "^8.1.5",
     "prettier": "^1.17.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }
