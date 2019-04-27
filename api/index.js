@@ -3,7 +3,7 @@ const axios = require('axios')
 const me = 'https://api.douban.com'
 const other = 'https://douban.uieee.com'
 
-const proxy = false;
+const proxy = false
 
 const baseUrl = proxy ? other : me
 
