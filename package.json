@@ -17,7 +17,7 @@
       "prettier --write",
       "git add"
     ],
-    "gql/**/*.{ts,js,graphql}": [
+    "gql/**/*.{ts,js}": [
       "prettier --write",
       "git add"
     ]

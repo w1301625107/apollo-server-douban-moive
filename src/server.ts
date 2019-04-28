@@ -1,21 +1,6 @@
-import { makeExecutableSchema } from 'graphql-tools'
 import * as Koa from 'koa'
-const { ApolloServer, gql } = require('apollo-server-koa')
-import { getMovie } from '../api/index'
-
-import typeDefs from '../schema/index'
-
-//A map of functions which return data for the schema.
-const resolvers = {
-  Query: {
-    movie: (root, { id }) => getMovie(id),
-  },
-}
-
-const schema = makeExecutableSchema({
-  typeDefs: [...typeDefs],
-  resolvers: resolvers,
-})
+import * as ApolloServer from 'apollo-server-koa'
+import schema from '../gql/index'
 
 class Server {
   public app: Koa
@@ -26,7 +11,7 @@ class Server {
   }
 
   private routes() {
-    const server = new ApolloServer({
+    const server = new ApolloServer.ApolloServer({
       schema,
       playground: true, // 开启开发UI调试工具
     })
