@@ -116,6 +116,32 @@ type Movie {
   "影评，前 10 条，影评结构，见附录"
   popular_reviews: [SimpleReview!]
 }
+type MovieConnection {
+  "資料"
+  edges: [MovieEdge!]!
+  "分頁資訊"
+  pageInfo: PageInfo!
+}
+
+type MovieEdge {
+  "指標。通常為一串 base64 字元"
+  cursor: String!
+  "實際 Post 資料"
+  node: Movie!
+}
+
+extend type Query {
+  moviesTop250(
+    "回傳開頭的前 N 筆資料"
+    first: Int
+    "會回傳該 curosr 後面的資料。一定要搭配 `first`"
+    after: String
+    "回傳倒數的 N 筆資料。一定要搭配 `before`"
+    last: Int
+    "會回傳該 curosr 前面的資料。一定要搭配 `last`"
+    before: String
+  ): MovieConnection!
+}
 
 extend type Query {
   "A simple type for getting started!"

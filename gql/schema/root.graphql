@@ -1,0 +1,18 @@
+# 查询
+type Query {
+	dummy: Boolean
+}
+
+# 变更
+type Mutation {
+	dummy: Boolean
+}
+
+type PageInfo {
+  "是否有下一頁"
+  hasNextPage: Boolean!
+  "是否有上一頁"
+  hasPreviousPage: Boolean!
+  "總頁數"
+  totalPageCount: Int
+}
