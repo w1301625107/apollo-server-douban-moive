@@ -16,6 +16,10 @@
     "api/**/*.{ts,js}": [
       "prettier --write",
       "git add"
+    ],
+    "gql/**/*.{ts,js,graphql}": [
+      "prettier --write",
+      "git add"
     ]
   },
   "author": "",
