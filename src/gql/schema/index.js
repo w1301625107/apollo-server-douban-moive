@@ -1,13 +1,12 @@
 import { resolve } from 'path'
 
 const fs = require('fs')
-const axios = require('axios')
 
-var glob = require('glob')
+import * as glob from 'glob'
 
 const typeDefs = []
 
-glob.sync(resolve(__dirname, '', '**/*.graphql')).forEach(path => {
+glob.sync(resolve(__dirname, '', '**/*.{graphql,gql}')).forEach(path => {
   const content = fs.readFileSync(path, {
     encoding: 'utf-8',
   })
