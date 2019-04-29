@@ -7,7 +7,7 @@ const UserInputError = ApolloServer.UserInputError
 //A map of functions which return data for the schema.
 const resolvers = {
   movie: (root, { id }) => getMovie(id),
-  moviesTop250: async (root, { first, after, last, before, reverse }) => {
+  moviesTop250: async (root, { first, after, last, before }) => {
     if (!first && after) throw new UserInputError('after must be with first')
     if ((last && !before) || (!last && before))
       throw new UserInputError('last and before must be used together')
@@ -20,9 +20,10 @@ const resolvers = {
     // 取得下一頁資料
     if (first) {
       if (after) {
-        from = top250.findIndex(
-          i => i.id == new Buffer(after, 'base64').toString(),
-        )
+        from =
+          top250.findIndex(
+            i => i.id == new Buffer(after, 'base64').toString(),
+          ) + 1
         to = from + first
       } else {
         from = 0
@@ -51,6 +52,8 @@ const resolvers = {
         node: movie,
       })),
       pageInfo: {
+        startCursor: Buffer.from(movies[0].id).toString('base64'),
+        endCursor: Buffer.from(movies[movies.length - 1].id).toString('base64'),
         // 檢查有無下一頁
         hasNextPage: to < allCount,
         // 檢查有無上一頁

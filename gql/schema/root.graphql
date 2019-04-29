@@ -15,4 +15,8 @@ type PageInfo {
   hasPreviousPage: Boolean!
   "總頁數"
   totalPageCount: Int
+
+  startCursor:String!
+
+  endCursor:String!
 }
