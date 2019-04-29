@@ -1,6 +1,6 @@
 import * as Koa from 'koa'
 import * as ApolloServer from 'apollo-server-koa'
-import schema from '../gql/index'
+import schema from './gql/index'
 
 class Server {
   public app: Koa

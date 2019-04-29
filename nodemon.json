@@ -14,7 +14,7 @@
 	"events": {
 		"restart": "echo \"[Warning] Remember run npm run test b4 push to dev branch !\""
 	},
-	"watch": ["./src","./api","./gql"],
+	"watch": ["./src"],
 	"ext": "js,ts, gql",
 	"inspect": true
 }

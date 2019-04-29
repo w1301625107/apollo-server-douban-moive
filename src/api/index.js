@@ -8,7 +8,10 @@ const proxy = false
 const baseUrl = proxy ? other : me
 
 export async function getMovie(id) {
+  console.log('fetch')
+
   let data = await axios.get(`${baseUrl}/v2/movie/subject/${id}`)
-  console.log('fetched')
+  // console.log("TCL: getMovie -> data", data)
+  console.log('fetch')
   return data.data
 }
