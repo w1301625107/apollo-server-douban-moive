@@ -1,0 +1,28 @@
+"""
+使用者
+"""
+type User {
+  "識別碼"
+  id: ID!
+  "帳號 email"
+  email: String!
+  "名字"
+  name: String
+  "密码"
+  password:String
+}
+
+# extend type Query{
+#   user(id:String!):User
+# }
+
+type Token {
+  token: String!
+}
+
+extend type Mutation {
+  "註冊。 email 與 passwrod 必填"
+  signUp(name: String, email: String!, password: String!): User
+  "登入"
+  login (email: String!, password: String!): Token
+}
