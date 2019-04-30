@@ -1,5 +1,4 @@
 import { resolve } from 'path'
-const fs = require('fs')
 
 import * as glob from 'glob'
 
@@ -7,8 +6,6 @@ const resolves = {
   Query: {},
   Mutation: {},
 }
-// // glob.sync('**/*.ts')
-// console.log("TCL: resolve(__dirname, '', '**/*.ts'", resolve(__dirname, '', '**/*.ts'))
 
 glob
   .sync(resolve(__dirname, '', '**/*.ts'), { ignore: ['**/index.ts'] })

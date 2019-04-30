@@ -1,6 +1,7 @@
 import * as Koa from 'koa'
 import * as ApolloServer from 'apollo-server-koa'
 import schema from './gql/index'
+import auth from './plugin/auth'
 
 class Server {
   public app: Koa
@@ -13,7 +14,10 @@ class Server {
   private routes() {
     const server = new ApolloServer.ApolloServer({
       schema,
-      playground: true, // 开启开发UI调试工具
+      playground: true, // 开启开发UI调试工具,
+      rootValue: {
+        auth,
+      },
     })
 
     server.applyMiddleware({ app: this.app })
