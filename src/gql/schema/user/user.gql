@@ -20,6 +20,10 @@ type Token {
   token: String!
 }
 
+extend type Query{
+  me:User @auth @test
+}
+
 extend type Mutation {
   "註冊。 email 與 passwrod 必填"
   signUp(name: String, email: String!, password: String!): User

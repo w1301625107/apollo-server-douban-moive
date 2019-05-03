@@ -1,9 +1,10 @@
 import { makeExecutableSchema } from 'graphql-tools'
 import typeDefs from './schema/index'
 import resolvers from './resolvers'
-console.log('TCL: resolvers', resolvers)
+import directives from './directives'
 
 export default makeExecutableSchema({
-  typeDefs: [...typeDefs],
+  typeDefs: [...directives.directive_typeDefs, ...typeDefs],
   resolvers,
+  schemaDirectives: directives.schemaDirectives,
 })

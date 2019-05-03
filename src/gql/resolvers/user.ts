@@ -12,8 +12,14 @@ const addUser = ({ name, email, password }) => {
   return user
 }
 
+const findUserByUserId = (id: number) => users.find(user => user.id == id)
+
 const resolvers = {
-  Query: {},
+  Query: {
+    me: (root, args, { me }) => {
+      return findUserByUserId(me.id)
+    },
+  },
   Mutation: {
     signUp: async ({ auth }, { name, email, password }, context) => {
       // 1. 檢查不能有重複註冊 email
