@@ -1,18 +1,9 @@
-import users from '../../fake_data/user'
-
-const addUser = ({ name, email, password }) => {
-  const user = {
-    id: users[users.length - 1].id + 1,
-    name,
-    email,
-    password,
-  }
-  users.push(user)
-
-  return user
-}
-
-const findUserByUserId = (id: number) => users.find(user => user.id == id)
+import {
+  addUser,
+  findUserByUserId,
+  uniqueEmail,
+  findUserByEmail,
+} from '../../model/user'
 
 const resolvers = {
   Query: {
@@ -23,7 +14,7 @@ const resolvers = {
   Mutation: {
     signUp: async ({ auth }, { name, email, password }, context) => {
       // 1. 檢查不能有重複註冊 email
-      const isUserEmailDuplicate = users.some(user => user.email === email)
+      const isUserEmailDuplicate = uniqueEmail(email)
       if (isUserEmailDuplicate) throw new Error('User Email Duplicate')
 
       // 2. 將 passwrod 加密再存進去。非常重要 !!
@@ -33,7 +24,7 @@ const resolvers = {
     },
     login: async ({ auth }, { email, password }, context) => {
       // 1. 透過 email 找到相對應的 user
-      const user = users.find(user => user.email === email)
+      const user = findUserByEmail(email)
       if (!user) throw new Error('Email Account Not Exists')
 
       // 2. 將傳進來的 password 與資料庫存的 user.password 做比對

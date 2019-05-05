@@ -1,5 +1,4 @@
-import { getMovie } from '../../api/index'
-import top250 from '../../fake_data/top250'
+import { getMovieById, getTop250 } from '../../model/movie'
 import * as ApolloServer from 'apollo-server-koa'
 
 const UserInputError = ApolloServer.UserInputError
@@ -7,7 +6,7 @@ const UserInputError = ApolloServer.UserInputError
 //A map of functions which return data for the schema.
 const resolvers = {
   Query: {
-    movie: (root, { id }) => getMovie(id),
+    movie: (root, { id }) => getMovieById(id),
     moviesTop250: async (root, { first, after, last, before }) => {
       if (!first && after) throw new UserInputError('after must be with first')
       if ((last && !before) || (!last && before))
@@ -15,35 +14,12 @@ const resolvers = {
       if (first && after && last && before)
         throw new UserInputError('Incorrect Arguments Usage.')
 
-      let movies: any[]
-      let from: number = 0
-      let to: number = 0
-      // 取得下一頁資料
-      if (first) {
-        if (after) {
-          from =
-            top250.findIndex(
-              i => i.id == new Buffer(after, 'base64').toString(),
-            ) + 1
-          to = from + first
-        } else {
-          from = 0
-          to = first
-        }
-      }
-
-      // 或是取得上一頁資料
-      if (last) {
-        to = top250.findIndex(
-          i => i.id == new Buffer(before, 'base64').toString(),
-        )
-        from = last - to
-      }
-
-      movies = top250.slice(from, to)
-
-      // 取得總數量
-      const allCount = top250.length
+      const { data: movies, from, to, allCount } = getTop250(
+        first,
+        after,
+        last,
+        before,
+      )
 
       return {
         edges: movies.map(movie => ({
