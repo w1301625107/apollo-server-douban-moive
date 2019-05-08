@@ -1,0 +1,13 @@
+union Result = Book | Author
+
+type Book {
+  title: String
+}
+
+type Author {
+  name: String
+}
+
+extend type Query {
+  UnionTest(contains: String!): [Result]
+}

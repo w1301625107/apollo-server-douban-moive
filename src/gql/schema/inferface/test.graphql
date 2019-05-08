@@ -1,0 +1,20 @@
+interface Animal {
+  name: String
+}
+
+type Bird implements Animal {
+  name: String
+  "翅膀展開長度"
+  wingSpanLength: Int
+}
+
+type Monkey implements Animal {
+  name: String
+  "手臂展開長度"
+  armSpanLength: Int
+}
+
+extend type Query {
+  animal(name: String): Animal
+  animals: [Animal]
+}
