@@ -14,7 +14,7 @@ const resolvers = {
       if (first && after && last && before)
         throw new UserInputError('Incorrect Arguments Usage.')
 
-      const { data: movies, from, to, allCount } = getTop250(
+      const { data: movies, from, to, allCount } = await getTop250(
         first,
         after,
         last,
